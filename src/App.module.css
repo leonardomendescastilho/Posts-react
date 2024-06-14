@@ -1,0 +1,12 @@
+.wrapper {
+  max-width: 112rem;
+  height: 100dvb;
+  padding-inline: 1.6rem;
+  margin-inline: auto;
+  margin-block: 3.2rem;
+
+  display: grid;
+  grid-template-columns: 256px 1fr;
+  align-items: flex-start;
+  gap: 3.2rem;
+}
