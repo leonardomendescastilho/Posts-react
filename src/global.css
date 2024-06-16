@@ -22,6 +22,10 @@ html {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
 }
+:focus {
+  outline: transparent;
+  box-shadow: 0 0 0 2px var(--green-500);
+}
 body {
   background-color: var(--gray-900);
   color: var(--gray-300);
