@@ -1,4 +1,5 @@
 import { PencilSimpleLine } from '@phosphor-icons/react';
+import { Avatar } from './Avatar';
 import style from '../components/Sidebar.module.css';
 
 export function Sidebar() {
@@ -10,8 +11,8 @@ export function Sidebar() {
       />
 
       <div className={style.profile}>
-        <img
-          className={style.avatar}
+        <Avatar
+          hasBorder
           src='https://pbs.twimg.com/profile_images/1617648020102778882/EyZ4P6oI_400x400.jpg'
         />
         <strong>Leonardo Mendes</strong>
@@ -19,11 +20,13 @@ export function Sidebar() {
       </div>
 
       <footer>
-          <a href='#'>
-            <PencilSimpleLine size={20} weight="bold" />
-            Editar seu perfil
-          </a>
-
+        <a href='#'>
+          <PencilSimpleLine
+            size={20}
+            weight='bold'
+          />
+          Editar seu perfil
+        </a>
       </footer>
     </aside>
   );
