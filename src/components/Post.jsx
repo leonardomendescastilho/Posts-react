@@ -1,45 +1,54 @@
+import { formatDistanceToNow } from 'date-fns';
+import { format } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 import { Comment } from './Comment';
 import { Avatar } from './Avatar';
 import styles from '../components/Post.module.css';
 
-export function Post() {
+export function Post({ author, publishedAt, content }) {
+  const publishedDateFormatted = format(
+    publishedAt,
+    "d 'de' LLLL 'às' HH:mm'h'",
+    {
+      locale: ptBR,
+    }
+  );
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    locale: ptBR,
+    addSuffix: true,
+  });
+
+  const contentDisplay =  content.map((line) => {
+    if (line.type === 'paragraph') {
+      return <p>{line.content}</p>;
+    } else if(line.type === 'link'){
+      return <p><a href="#"></a>{line.content}</p>
+    }
+  })
+
   return (
     <article className={styles.post}>
       <header className={styles.header}>
         <div className={styles.author}>
           <Avatar
             hasBorder
-            src='https://avatars.githubusercontent.com/u/40183495?v=4'
+            src={author.avatarUrl}
           />
           <div className={styles.authorInfo}>
-            <strong>Nathan</strong>
-            <span>Dev Back-End</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
         <time
           className={styles.timeInfo}
-          title='11 de julho às 18:22'
-          dateTime='2024-06-14 18:22:00'>
-          Publicado há 1h
+          title={publishedDateFormatted}
+          dateTime={publishedAt.toISOString()}>
+          {publishedDateRelativeToNow}
         </time>
       </header>
 
       <div className={styles.content}>
-        <p>
-          Fala galeraa 👋 Acabei de subir mais um projeto no meu portifa. É um
-        </p>
-        <p>
-          projeto que fiz no NLW Return, evento da Rocketseat. O nome doprojeto
-          é DoctorCare 🚀
-        </p>
-        <a href='#'>
-          <p>👉 jane.design/doctorcare</p>
-        </a>
-        <p>
-          <a href='#'>#novoprojeto </a>
-          <a href='#'>#nlw </a>
-          <a href='#'>#rocketseat </a>
-        </p>
+       {contentDisplay}
       </div>
 
       <form className={styles.comment}>
